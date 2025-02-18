@@ -35,11 +35,10 @@ public class OrderDetail extends Auditable<String> {
     private Double subtotal;
 
     @ManyToOne
-    @Column(nullable = false)
+//    @Column(nullable = false)
     private Order order;
 
     @ManyToOne
-    @Column(nullable = false)
     protected Product product;
 
 }

@@ -34,11 +34,11 @@ public class Order extends Auditable<String> {
     private String description;
 
     @ManyToOne
-    @JoinColumn(name = "customer_id")
+//    @JoinColumn(name = "customer_id")
     private  User customer;
 
     @ManyToOne
-    @JoinColumn(name = "employee_id")
+//    @JoinColumn(name = "employee_id")
     private  User employee;
 
 

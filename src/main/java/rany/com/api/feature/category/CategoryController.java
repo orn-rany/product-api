@@ -8,9 +8,6 @@ import org.springframework.web.bind.annotation.*;
 import rany.com.api.feature.category.dto.CategoryCreateRequest;
 import rany.com.api.feature.category.dto.CategoryResponse;
 import rany.com.api.feature.category.dto.CategoryUpdateRequest;
-import rany.com.api.feature.product.dto.ProductRequest;
-import rany.com.api.feature.product.dto.ProductResponse;
-import rany.com.api.feature.product.dto.ProductUpdateRequest;
 
 @RestController
 @RequiredArgsConstructor

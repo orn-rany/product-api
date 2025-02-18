@@ -42,7 +42,7 @@ public class User extends Auditable<String > {
     private String address;
 
     @OneToOne
-    @Column(nullable = false,unique = true)
+//    @Column(nullable = false,unique = true)
     private Role role;
 
 }
