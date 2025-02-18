@@ -16,19 +16,9 @@ public interface ProductMapper {
     @Mapping(target = "description", source = "description")
     Product fromRequest(ProductRequest videoRequest);
 
-//    @Mapping(source ="image",target = "image",qualifiedByName = "getImageUrl")
     ProductResponse toResponse(Product product);
 
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     void updateProductFromRequest(@MappingTarget Product product, ProductUpdateRequest productUpdateRequest);
 
-//    @Named("getImageUrl")
-//    default String getLogoUrl(String image) {
-//
-//        if (image != null && !image.trim().isEmpty()) {
-//            return MediaUtil.getUrl(image);
-//        } else {
-//            return null;
-//        }
-//    }
 }
