@@ -1,14 +1,22 @@
 package rany.com.api.feature.user;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 import rany.com.api.feature.user.dto.UserCreateRequest;
 import rany.com.api.feature.user.dto.UserResponse;
 import rany.com.api.feature.user.dto.UserUpdateRequest;
+import rany.com.api.mapper.UserMapper;
 
 
 @Service
+@RequiredArgsConstructor
 public class UserServiceImpl implements UserService{
+
+    private final UserRepository userRepository;
+
+    private final UserMapper userMapper;
+
     @Override
     public void createUser(UserCreateRequest userCreateRequest) {
 
