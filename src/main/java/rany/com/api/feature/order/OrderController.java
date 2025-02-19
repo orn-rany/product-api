@@ -6,10 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import rany.com.api.feature.order.dto.OrderCreateRequest;
-import rany.com.api.feature.order.dto.OrderResponse;
-import rany.com.api.feature.order.dto.OrderUpdateRequest;
-import rany.com.api.feature.order.dto.OrderWithDetailResponse;
+import rany.com.api.feature.order.dto.*;
 
 @RestController
 @RequiredArgsConstructor
@@ -23,6 +20,13 @@ public class OrderController {
     public void createOrder(@Valid @RequestBody OrderCreateRequest orderCreateRequest){
 
         orderService.createOrder(orderCreateRequest);
+    }
+
+    @PostMapping("/detail")
+    @ResponseStatus(HttpStatus.CREATED)
+    public void createOrderWithDetail(@Valid @RequestBody OrderWithDetailCreateRequest orderCreateRequest){
+
+        orderService.createOrderWithDetail(orderCreateRequest);
     }
 
     @GetMapping

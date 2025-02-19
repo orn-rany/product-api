@@ -16,10 +16,6 @@ public record UserUpdateRequest(
         @Size(max = 50, message = "Email cannot exceed 50 characters")
         String email,
 
-
-        @Size(min = 6, max = 50, message = "Password must be between 6 and 50 characters")
-        String password,
-
         @Past(message = "Date of birth must be in the past")
         LocalDate dob,
 
