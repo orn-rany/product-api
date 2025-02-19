@@ -18,7 +18,7 @@ public class Product  extends Auditable<String> {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(length = 100,nullable = false)
+    @Column(length = 100,unique = true,nullable = false)
     private String name;
 
     @Column(length = 255)

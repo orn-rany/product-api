@@ -1,10 +1,7 @@
 package rany.com.api.domain;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 import rany.com.api.config.jpa.Auditable;
 
 import java.time.LocalDateTime;
@@ -16,6 +13,7 @@ import java.util.Set;
 @Getter
 @Setter
 @ToString
+@AllArgsConstructor
 public class Order extends Auditable<String> {
 
     @Id
@@ -42,7 +40,7 @@ public class Order extends Auditable<String> {
 //    @JoinColumn(name = "employee_id")
     private  User employee;
 
-    @OneToMany(mappedBy = "order")
-    Set<OrderDetail> orderDetails;
+    @OneToMany(mappedBy = "order", cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE})
+    private Set<OrderDetail> orderDetails;
 
 }

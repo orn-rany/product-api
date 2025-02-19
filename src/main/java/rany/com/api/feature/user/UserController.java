@@ -3,6 +3,7 @@ package rany.com.api.feature.user;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import rany.com.api.feature.user.dto.UserCreateRequest;
 import rany.com.api.feature.user.dto.UserResponse;
@@ -16,6 +17,7 @@ public class UserController {
     private final UserService userService;
 
     @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
     public void createUser(@Valid @RequestBody UserCreateRequest userCreateRequest) {
 
         userService.createUser(userCreateRequest);
@@ -42,6 +44,7 @@ public class UserController {
     }
 
     @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteUserById(@PathVariable Long id) {
 
         userService.deleteUser(id);
