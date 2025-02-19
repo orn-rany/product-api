@@ -35,7 +35,6 @@ public class OrderDetail extends Auditable<String> {
     private Double subtotal;
 
     @ManyToOne
-//    @Column(nullable = false)
     private Order order;
 
     @ManyToOne

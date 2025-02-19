@@ -8,6 +8,7 @@ import lombok.ToString;
 import rany.com.api.config.jpa.Auditable;
 
 import java.time.LocalDateTime;
+import java.util.Set;
 
 @NoArgsConstructor
 @Entity
@@ -41,5 +42,7 @@ public class Order extends Auditable<String> {
 //    @JoinColumn(name = "employee_id")
     private  User employee;
 
+    @OneToMany(mappedBy = "order")
+    Set<OrderDetail> orderDetails;
 
 }

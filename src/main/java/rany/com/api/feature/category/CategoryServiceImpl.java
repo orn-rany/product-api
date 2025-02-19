@@ -3,7 +3,9 @@ package rany.com.api.feature.category;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 import rany.com.api.domain.Category;
 import rany.com.api.domain.Product;
 import rany.com.api.feature.category.dto.CategoryCreateRequest;
@@ -42,7 +44,7 @@ public class CategoryServiceImpl implements CategoryService{
     @Override
     public CategoryResponse getCategoryById(Long id) {
 
-        Category category = categoryRepository.findById(id).orElseThrow();
+        Category category = categoryRepository.findById(id).orElseThrow(()->new ResponseStatusException(HttpStatus.NOT_FOUND,String.format("category = %s has not been found",id)));
 
         return categoryMapper.toCategoryResponse(category);
     }
@@ -50,7 +52,7 @@ public class CategoryServiceImpl implements CategoryService{
     @Override
     public CategoryResponse updateCategory(Long id, CategoryUpdateRequest categoryUpdateRequest) {
 
-        Category category = categoryRepository.findById(id).orElseThrow();
+        Category category = categoryRepository.findById(id).orElseThrow(()->new ResponseStatusException(HttpStatus.NOT_FOUND,String.format("category = %s has not been found",id)));
 
         categoryRepository.save(category);
 
@@ -60,7 +62,7 @@ public class CategoryServiceImpl implements CategoryService{
     @Override
     public void deleteCategory(Long id) {
 
-        Category category = categoryRepository.findById(id).orElseThrow();
+        Category category = categoryRepository.findById(id).orElseThrow(()->new ResponseStatusException(HttpStatus.NOT_FOUND,String.format("category = %s has not been found",id)));
 
         categoryRepository.delete(category);
 

@@ -4,21 +4,23 @@ import org.mapstruct.BeanMapping;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingTarget;
 import org.mapstruct.NullValuePropertyMappingStrategy;
-import rany.com.api.domain.Product;
+import rany.com.api.domain.Role;
 import rany.com.api.domain.User;
-import rany.com.api.feature.product.dto.ProductUpdateRequest;
+import rany.com.api.feature.role.dto.RoleCreateRequest;
+import rany.com.api.feature.role.dto.RoleResponse;
+import rany.com.api.feature.role.dto.RoleUpdateRequest;
 import rany.com.api.feature.user.dto.UserCreateRequest;
 import rany.com.api.feature.user.dto.UserResponse;
 import rany.com.api.feature.user.dto.UserUpdateRequest;
 
 @Mapper(componentModel = "spring")
-public interface UserMapper {
+public interface RoleMapper {
 
-    User fromUserCreateRequest(UserCreateRequest userCreateRequest);
+    Role fromUserCreateRequest(RoleCreateRequest roleCreateRequest);
 
-    UserResponse toUserResponse(User user);
+    RoleResponse toRoleResponse(Role role);
 
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
-    void updateUserFromRequest(@MappingTarget User user, UserUpdateRequest userUpdateRequest);
+    void updateRoleFromRequest(@MappingTarget Role role, RoleUpdateRequest roleUpdateRequest);
 
 }
