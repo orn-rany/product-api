@@ -54,6 +54,8 @@ public class CategoryServiceImpl implements CategoryService{
 
         Category category = categoryRepository.findById(id).orElseThrow(()->new ResponseStatusException(HttpStatus.NOT_FOUND,String.format("category = %s has not been found",id)));
 
+        categoryMapper.updateCategoryFromRequest(category,categoryUpdateRequest);
+
         categoryRepository.save(category);
 
         return categoryMapper.toCategoryResponse(category);
