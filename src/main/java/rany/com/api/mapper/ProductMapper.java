@@ -10,10 +10,10 @@ import rany.com.api.utils.MediaUtil;
 @Mapper(componentModel = "spring")
 public interface ProductMapper {
 
-    @Mapping(target = "name", source = "name")
-    @Mapping(target = "image", source = "image")
-    @Mapping(target = "price", source = "price")
-    @Mapping(target = "description", source = "description")
+//    @Mapping(target = "name", source = "name")
+//    @Mapping(target = "image", source = "image")
+//    @Mapping(target = "price", source = "price")
+//    @Mapping(target = "description", source = "description")
     Product fromRequest(ProductRequest videoRequest);
 
     ProductResponse toResponse(Product product);

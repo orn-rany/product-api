@@ -11,8 +11,8 @@ import rany.com.api.feature.product.dto.ProductUpdateRequest;
 @Mapper(componentModel = "spring")
 public interface CategoryMapper {
 
-    @Mapping(source = "categoryName",target = "categoryName")
-    @Mapping(source = "description",target = "description")
+//    @Mapping(source = "categoryName",target = "categoryName")
+//    @Mapping(source = "description",target = "description")
     Category fromCategoryCreateRequest(CategoryCreateRequest categoryCreateRequest);
 
     CategoryResponse toCategoryResponse(Category category);

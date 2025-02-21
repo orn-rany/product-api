@@ -11,11 +11,11 @@ public interface ProductService {
 
     Page<ProductResponse> getAllProducts(int pageNumber, int pageSize);
 
-    ProductResponse getProductById(String id);
+    ProductResponse getProductById(Long id);
 
-    ProductResponse updateProductById(String id, ProductUpdateRequest productUpdateRequest);
+    ProductResponse updateProductById(Long id, ProductUpdateRequest productUpdateRequest);
 
-    void deleteProductById(String id);
+    void deleteProductById(Long id);
 
 
 }

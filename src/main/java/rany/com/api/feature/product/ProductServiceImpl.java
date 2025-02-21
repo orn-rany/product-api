@@ -47,7 +47,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public ProductResponse getProductById(String id) {
+    public ProductResponse getProductById(Long id) {
 
         Product product =
                 productRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,
@@ -57,7 +57,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public ProductResponse updateProductById(String id, ProductUpdateRequest productUpdateRequest) {
+    public ProductResponse updateProductById(Long id, ProductUpdateRequest productUpdateRequest) {
 
         Product product =
                 productRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,
@@ -71,7 +71,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public void deleteProductById(String id) {
+    public void deleteProductById(Long id) {
 
 
         Product product =

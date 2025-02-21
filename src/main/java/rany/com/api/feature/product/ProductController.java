@@ -32,13 +32,13 @@ public class ProductController {
     }
 
     @GetMapping("/{id}")
-    public ProductResponse getProductById(@PathVariable String id) {
+    public ProductResponse getProductById(@PathVariable Long id) {
 
         return productService.getProductById(id);
     }
 
     @PatchMapping("/{id}")
-    public ProductResponse updateProductById(@PathVariable String id,
+    public ProductResponse updateProductById(@PathVariable Long id,
                                              @Valid @RequestBody ProductUpdateRequest productUpdateRequest) {
 
         return productService.updateProductById(id, productUpdateRequest);
@@ -46,7 +46,7 @@ public class ProductController {
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteProductById(@PathVariable String id) {
+    public void deleteProductById(@PathVariable Long id) {
 
         productService.deleteProductById(id);
     }

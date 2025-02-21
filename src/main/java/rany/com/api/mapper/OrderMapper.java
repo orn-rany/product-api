@@ -15,7 +15,11 @@ public interface OrderMapper {
 
     OrderResponse toOrderResponse(Order order);
 
-    @Mapping(source = "orderDetails",target = "orderDetails",ignore = true)
+    OrderResponse toOrderResponse(Order order,Long customerId,String customerName,Long employeeId,String employeeName);
+
+//    @Mapping(source = "orderDetails",target = "orderDetails",ignore = true)
+//    @Mapping(target = "customer", source = "customerId", ignore = true)
+//    @Mapping(source = "employeeId",target = "employee",ignore = true)
     Order fromOrderWithDetailCreateRequest(OrderWithDetailCreateRequest orderWithDetailCreateRequest);
 
     OrderWithDetailResponse  toOrderWithDetailResponse(Order order);
