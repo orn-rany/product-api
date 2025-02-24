@@ -1,10 +1,7 @@
 package rany.com.api.feature.order;
 
 import org.springframework.data.domain.Page;
-import rany.com.api.feature.order.dto.OrderCreateRequest;
-import rany.com.api.feature.order.dto.OrderResponse;
-import rany.com.api.feature.order.dto.OrderUpdateRequest;
-import rany.com.api.feature.order.dto.OrderWithDetailCreateRequest;
+import rany.com.api.feature.order.dto.*;
 
 public interface OrderService {
 
@@ -12,6 +9,8 @@ public interface OrderService {
 
 
     void createOrderWithDetail(OrderWithDetailCreateRequest orderWithDetailCreateRequest);
+
+    OrderWithDetailResponse getOrderWithDetailById(Long id);
 
 
     OrderResponse getOrderById(Long id);

@@ -8,10 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 import rany.com.api.domain.*;
-import rany.com.api.feature.order.dto.OrderCreateRequest;
-import rany.com.api.feature.order.dto.OrderResponse;
-import rany.com.api.feature.order.dto.OrderUpdateRequest;
-import rany.com.api.feature.order.dto.OrderWithDetailCreateRequest;
+import rany.com.api.feature.order.dto.*;
 import rany.com.api.feature.order_detail.dto.OrderDetailCreateRequest;
 import rany.com.api.feature.product.ProductRepository;
 import rany.com.api.feature.user.UserRepository;
@@ -50,7 +47,7 @@ public class OrderServiceImpl implements OrderService{
 
         User customer = userRepository.findByIdAndRoleRoleName(orderWithDetailCreateRequest.customerId(),"CUSTOMER").orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND,String.format("customer = %s has not been found",orderWithDetailCreateRequest.customerId())));
 
-        User employee = userRepository.findByIdAndRoleRoleName(orderWithDetailCreateRequest.customerId(),"EMPLOYEE").orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND,String.format("employee = %s has not been found",orderWithDetailCreateRequest.employeeId())));
+        User employee = userRepository.findByIdAndRoleRoleName(orderWithDetailCreateRequest.employeeId(),"EMPLOYEE").orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND,String.format("employee = %s has not been found",orderWithDetailCreateRequest.employeeId())));
 
 
         for(OrderDetailCreateRequest orderDetailCreateRequest:orderWithDetailCreateRequest.orderDetails()){
@@ -78,6 +75,21 @@ public class OrderServiceImpl implements OrderService{
     }
 
     @Override
+    public OrderWithDetailResponse getOrderWithDetailById(Long id) {
+
+        Order order = orderRepository.findById(id).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND,String.format("order = %s has not been found",id)));
+
+        String customerName = order.getCustomer().getUserName();
+        String employeeName=order.getEmployee().getUserName();
+        Long customerId=order.getCustomer().getId();
+        Long employeeId=order.getEmployee().getId();
+
+        return orderMapper.toOrderWithDetailResponse(order);
+
+
+    }
+
+    @Override
     public OrderResponse getOrderById(Long id) {
 
         Order order = orderRepository.findById(id).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND,String.format("order = %s has not been found",id)));
@@ -88,6 +100,7 @@ public class OrderServiceImpl implements OrderService{
         Long employeeId=order.getEmployee().getId();
 
         return orderMapper.toOrderResponse(order,customerId,customerName,employeeId,employeeName);
+
     }
 
     @Override

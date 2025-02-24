@@ -8,7 +8,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
+import rany.com.api.domain.Role;
 import rany.com.api.domain.User;
+import rany.com.api.feature.role.RoleRepository;
 import rany.com.api.feature.user.dto.UserCreateRequest;
 import rany.com.api.feature.user.dto.UserResponse;
 import rany.com.api.feature.user.dto.UserUpdateRequest;
@@ -17,16 +19,21 @@ import rany.com.api.mapper.UserMapper;
 
 @Service
 @RequiredArgsConstructor
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
 
     private final UserMapper userMapper;
 
+    private final RoleRepository roleRepository;
+
     @Override
     public void createUser(UserCreateRequest userCreateRequest) {
 
         User user = userMapper.fromUserCreateRequest(userCreateRequest);
+
+        Role role = roleRepository.findById(userCreateRequest.roleId()).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, String.format("Role = %s has not been found", userCreateRequest.roleId())));
+        user.setRole(role);
 
         userRepository.save(user);
 
@@ -35,7 +42,7 @@ public class UserServiceImpl implements UserService{
     @Override
     public UserResponse getUserById(Long id) {
 
-        User user = userRepository.findById(id).orElseThrow(()->new ResponseStatusException(HttpStatus.NOT_FOUND,String.format("user = %s has not been found",id)));
+        User user = userRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, String.format("user = %s has not been found", id)));
 
         return userMapper.toUserResponse(user);
     }
@@ -43,11 +50,11 @@ public class UserServiceImpl implements UserService{
     @Override
     public Page<UserResponse> getAllUsers(int pageNumber, int pageSize) {
 
-        Sort sort = Sort.by(Sort.Direction.ASC,"createdDate");
+        Sort sort = Sort.by(Sort.Direction.ASC, "createdDate");
 
-        PageRequest pageRequest = PageRequest.of(pageNumber,pageSize,sort);
+        PageRequest pageRequest = PageRequest.of(pageNumber, pageSize, sort);
 
-        Page<User> userPage =userRepository.findAll(pageRequest);
+        Page<User> userPage = userRepository.findAll(pageRequest);
 
         return userPage.map(userMapper::toUserResponse);
     }
@@ -55,9 +62,9 @@ public class UserServiceImpl implements UserService{
     @Override
     public UserResponse updateUser(Long id, UserUpdateRequest userUpdateRequest) {
 
-        User user = userRepository.findById(id).orElseThrow(()->new ResponseStatusException(HttpStatus.NOT_FOUND,String.format("user = %s has not been found",id)));
+        User user = userRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, String.format("user = %s has not been found", id)));
 
-        userMapper.updateUserFromRequest(user,userUpdateRequest);
+        userMapper.updateUserFromRequest(user, userUpdateRequest);
 
         userRepository.save(user);
 
@@ -67,7 +74,7 @@ public class UserServiceImpl implements UserService{
     @Override
     public void deleteUser(Long id) {
 
-        User user = userRepository.findById(id).orElseThrow(()->new ResponseStatusException(HttpStatus.NOT_FOUND,String.format("user = %s has not been found",id)));
+        User user = userRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, String.format("user = %s has not been found", id)));
 
         userRepository.delete(user);
     }

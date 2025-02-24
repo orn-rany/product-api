@@ -16,6 +16,7 @@ public interface ProductMapper {
 //    @Mapping(target = "description", source = "description")
     Product fromRequest(ProductRequest videoRequest);
 
+    @Mapping(source = "id",target = "id")
     ProductResponse toResponse(Product product);
 
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)

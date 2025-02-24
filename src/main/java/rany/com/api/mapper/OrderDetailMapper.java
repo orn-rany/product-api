@@ -1,14 +1,12 @@
 package rany.com.api.mapper;
 
-import org.mapstruct.BeanMapping;
-import org.mapstruct.Mapper;
-import org.mapstruct.MappingTarget;
-import org.mapstruct.NullValuePropertyMappingStrategy;
+import org.mapstruct.*;
 import rany.com.api.domain.Order;
 import rany.com.api.domain.OrderDetail;
 import rany.com.api.feature.order.dto.OrderCreateRequest;
 import rany.com.api.feature.order.dto.OrderResponse;
 import rany.com.api.feature.order.dto.OrderUpdateRequest;
+import rany.com.api.feature.order.dto.OrderWithDetailResponse;
 import rany.com.api.feature.order_detail.dto.OrderDetailCreateRequest;
 import rany.com.api.feature.order_detail.dto.OrderDetailResponse;
 import rany.com.api.feature.order_detail.dto.OrderDetailUpdateRequest;
@@ -18,6 +16,7 @@ public interface OrderDetailMapper {
 
     OrderDetail fromOrderCreateRequest(OrderDetailCreateRequest orderDetailCreateRequest);
 
+    @Mapping(source = "id",target = "id")
     OrderDetailResponse toOrderDetailResponse(OrderDetail orderDetail);
 
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)

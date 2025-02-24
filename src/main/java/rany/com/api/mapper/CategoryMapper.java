@@ -13,8 +13,10 @@ public interface CategoryMapper {
 
 //    @Mapping(source = "categoryName",target = "categoryName")
 //    @Mapping(source = "description",target = "description")
+
     Category fromCategoryCreateRequest(CategoryCreateRequest categoryCreateRequest);
 
+    @Mapping(source = "id",target = "id")
     CategoryResponse toCategoryResponse(Category category);
 
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)

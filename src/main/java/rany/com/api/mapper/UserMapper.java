@@ -1,9 +1,6 @@
 package rany.com.api.mapper;
 
-import org.mapstruct.BeanMapping;
-import org.mapstruct.Mapper;
-import org.mapstruct.MappingTarget;
-import org.mapstruct.NullValuePropertyMappingStrategy;
+import org.mapstruct.*;
 import rany.com.api.domain.Product;
 import rany.com.api.domain.User;
 import rany.com.api.feature.product.dto.ProductUpdateRequest;
@@ -16,6 +13,7 @@ public interface UserMapper {
 
     User fromUserCreateRequest(UserCreateRequest userCreateRequest);
 
+    @Mapping(source = "userName",target = "userName")
     UserResponse toUserResponse(User user);
 
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)

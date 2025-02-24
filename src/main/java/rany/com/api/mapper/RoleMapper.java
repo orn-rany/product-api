@@ -1,9 +1,6 @@
 package rany.com.api.mapper;
 
-import org.mapstruct.BeanMapping;
-import org.mapstruct.Mapper;
-import org.mapstruct.MappingTarget;
-import org.mapstruct.NullValuePropertyMappingStrategy;
+import org.mapstruct.*;
 import rany.com.api.domain.Role;
 import rany.com.api.domain.User;
 import rany.com.api.feature.role.dto.RoleCreateRequest;
@@ -18,6 +15,7 @@ public interface RoleMapper {
 
     Role fromUserCreateRequest(RoleCreateRequest roleCreateRequest);
 
+    @Mapping(source = "id",target = "id")
     RoleResponse toRoleResponse(Role role);
 
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
